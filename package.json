@@ -7,12 +7,14 @@
     "start:build": "tsc -w",
     "start:run": "nodemon build/index.js",
     "start": "concurrently yarn:start:*"
-    
   },
   "author": "Daniil Pokinsokha",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^6.3.0",
     "nodemon": "^2.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6"
   }
 }
