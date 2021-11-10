@@ -1,4 +1,7 @@
 import { MatchData } from "./MatchData";
+import {WinsAnalysis} from './analyzers/WinsAnalysis';
+import {HtmlReport} from './reportTargets/HtmlReport';
+import { ConsoleReport } from "./reportTargets/ConsoleReport";
 
 interface Analyzer {
   run(matches: MatchData[]): string;
@@ -9,6 +12,18 @@ interface OutputTarget {
 }
 
 class Summary {
+  static winsAnalysesWithHtmlReport(team: string): Summary {
+    return new Summary(
+      new WinsAnalysis(team),
+      new HtmlReport()
+    );
+  }
+  static winsAnalysesWithConsoleReport(team: string): Summary {
+    return new Summary(
+      new WinsAnalysis(team),
+      new ConsoleReport()
+    );
+  }
   constructor(public analyser: Analyzer, public outputTarget: OutputTarget) {}
 
   buildAndPrintReport(matches: MatchData[]): void{
@@ -16,7 +31,5 @@ class Summary {
     this.outputTarget.print(output);
   }
 }
-
-// new Summary(new WinsAnalysis(), new ConsoleReport());
 
 export {Summary, Analyzer,OutputTarget}
